@@ -15,9 +15,18 @@
         <div class="inputContent">
           <a class="inputValue">喂水</a>
           <n-input-number clearable :precision="2" class="input" round placeholder="数字"
-                          v-model:value="morningGiveWater">
+                          v-model:value="morningGiveSaltWater">
             <template #suffix>
-              克
+              盐水
+            </template>
+          </n-input-number>
+        </div>
+        <div class="inputContent">
+          <a class="inputValue">喂水</a>
+          <n-input-number clearable :precision="2" class="input" round placeholder="数字"
+                          v-model:value="morningGiveCommonWater">
+            <template #suffix>
+              清水
             </template>
           </n-input-number>
         </div>
@@ -33,9 +42,18 @@
         <div class="inputContent">
           <a class="inputValue">剩了</a>
           <n-input-number clearable :precision="2" class="input" round placeholder="数字"
-                          v-model:value="morningLessDrink">
+                          v-model:value="morningLessSaltDrink">
             <template #suffix>
-              克水
+              盐水
+            </template>
+          </n-input-number>
+        </div>
+        <div class="inputContent">
+          <a class="inputValue">剩了</a>
+          <n-input-number clearable :precision="2" class="input" round placeholder="数字"
+                          v-model:value="morningLessCommonDrink">
+            <template #suffix>
+              清水
             </template>
           </n-input-number>
         </div>
@@ -52,11 +70,20 @@
           </n-input-number>
         </div>
         <div class="inputContent">
-          <a class="inputValue">喝水</a>
+          <a class="inputValue">喂水</a>
           <n-input-number clearable :precision="2" class="input" round placeholder="数字"
-                          v-model:value="yesterdayGiveWater">
+                          v-model:value="yesterdayGiveSaltDrink">
             <template #suffix>
-              克
+              盐水
+            </template>
+          </n-input-number>
+        </div>
+        <div class="inputContent">
+          <a class="inputValue">喂水</a>
+          <n-input-number clearable :precision="2" class="input" round placeholder="数字"
+                          v-model:value="yesterdayGiveCommonDrink">
+            <template #suffix>
+              清水
             </template>
           </n-input-number>
         </div>
@@ -70,11 +97,20 @@
           </n-input-number>
         </div>
         <div class="inputContent">
-          <a class="inputValue">剩了</a>
+          <a class="inputValue">剩下</a>
           <n-input-number clearable :precision="2" class="input" round placeholder="数字"
-                          v-model:value="yesterdayLessWater">
+                          v-model:value="yesterdayLessSaltDrink">
             <template #suffix>
-              克水
+              盐水
+            </template>
+          </n-input-number>
+        </div>
+        <div class="inputContent">
+          <a class="inputValue">剩下</a>
+          <n-input-number clearable :precision="2" class="input" round placeholder="数字"
+                          v-model:value="yesterdayLessCommonDrink">
+            <template #suffix>
+              清水
             </template>
           </n-input-number>
         </div>
@@ -84,7 +120,7 @@
         <div class="inputDiv">
           <div class="inputContent">
             <a class="inputValue">反刍</a>
-            <n-input-number clearable :precision="2" class="input" round placeholder="数字"
+            <n-input-number clearable class="input" round placeholder="数字"
                             v-model:value="ruminationCount">
               <template #suffix>
                 次
@@ -101,7 +137,7 @@
           </div>
           <div class="inputContent">
             <a class="inputValue">饲料</a>
-            <n-input-number class="input" round placeholder="数字" v-model:value="feedEaten">
+            <n-input-number class="input" round placeholder="数字"  :precision="2" v-model:value="feedEaten">
               <template #suffix>
                 克
               </template>
@@ -133,24 +169,27 @@
 </template>
 <script setup lang="ts">
 import {ref} from "vue";
-import { useNotification } from "naive-ui";
 import {NInputNumber, NButton, NInput, NAlert} from "naive-ui"
 import moment from "moment/moment";
 import {
   ruminationNeed,
   ruminationCount,
-  yesterdayGiveGrass, morningLessGrass,
+  yesterdayGiveGrass,
+  morningLessGrass,
   morningGiveGrass,
-  morningGiveWater,
-  morningLessDrink,
-  yesterdayGiveWater,
+  yesterdayGiveSaltDrink,
   yesterdayLessGrass,
-  yesterdayLessWater,
+  morningLessSaltDrink,
+  morningLessCommonDrink,
+  morningGiveCommonWater,
+  morningGiveSaltWater,
+  yesterdayLessSaltDrink, yesterdayLessCommonDrink, yesterdayGiveCommonDrink,
 } from "@/components/ts/useStorage"
 import 'moment/dist/locale/en-au.js';
 import 'moment/dist/locale/zh-cn.js';
 
 moment.locale("zh")
+
 
 const clipboardInfo =ref()
 const time = ref<string>()
@@ -160,8 +199,12 @@ const yesterdayEatCount = ref<number>()
 const morningDrinkCount = ref<number>()
 const yesterdayDrinkCount = ref<number>()
 const allEatCount = ref<number>()
-const feedEaten = ref<number>()
+const feedEaten = ref<number>(0)
 const allDrinkCount = ref<number>()
+const morningGiveWater=ref<number>()
+const morningLessDrink=ref<number>()
+const yesterdayGiveWater=ref<number>()
+const yesterdayLessWater =ref<number>()
 
 function clipboardUse() {
   navigator.clipboard.writeText(output.value)
@@ -174,6 +217,11 @@ function clipboardUse() {
 }
 
 function clickOutput() {
+  morningGiveWater.value=morningGiveSaltWater.value+morningGiveCommonWater.value
+  morningLessDrink.value=morningLessCommonDrink.value+morningLessSaltDrink.value
+  yesterdayLessWater.value=yesterdayLessSaltDrink.value+yesterdayLessCommonDrink.value
+  yesterdayGiveWater.value=yesterdayGiveCommonDrink.value+yesterdayGiveSaltDrink.value
+  //上面计算的总水量
   morningEatCount.value = morningGiveGrass.value - morningLessGrass.value
   morningDrinkCount.value = morningGiveWater.value - morningLessDrink.value
   yesterdayEatCount.value = yesterdayGiveGrass.value - yesterdayLessGrass.value
