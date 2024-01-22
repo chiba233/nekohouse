@@ -5,7 +5,7 @@
       <div class="inputDiv">
         <div class="inputContent">
           <a class="inputValue">备草</a>
-          <n-input-number clearable :precision="2" class="input" round placeholder="数字"
+          <n-input-number clearable :precision="1" class="input" round placeholder="数字"
                           v-model:value="morningGiveGrass">
             <template #suffix>
               克
@@ -14,7 +14,7 @@
         </div>
         <div class="inputContent">
           <a class="inputValue">喂水</a>
-          <n-input-number clearable :precision="2" class="input" round placeholder="数字"
+          <n-input-number clearable :precision="1" class="input" round placeholder="数字"
                           v-model:value="morningGiveSaltWater">
             <template #suffix>
               盐水
@@ -23,7 +23,7 @@
         </div>
         <div class="inputContent">
           <a class="inputValue">喂水</a>
-          <n-input-number clearable :precision="2" class="input" round placeholder="数字"
+          <n-input-number clearable :precision="1" class="input" round placeholder="数字"
                           v-model:value="morningGiveCommonWater">
             <template #suffix>
               清水
@@ -32,7 +32,7 @@
         </div>
         <div class="inputContent">
           <a class="inputValue">剩了</a>
-          <n-input-number clearable :precision="2" class="input" round placeholder="数字"
+          <n-input-number clearable :precision="1" class="input" round placeholder="数字"
                           v-model:value="morningLessGrass">
             <template #suffix>
               克草
@@ -41,7 +41,7 @@
         </div>
         <div class="inputContent">
           <a class="inputValue">剩了</a>
-          <n-input-number clearable :precision="2" class="input" round placeholder="数字"
+          <n-input-number clearable :precision="1" class="input" round placeholder="数字"
                           v-model:value="morningLessSaltDrink">
             <template #suffix>
               盐水
@@ -50,7 +50,7 @@
         </div>
         <div class="inputContent">
           <a class="inputValue">剩了</a>
-          <n-input-number clearable :precision="2" class="input" round placeholder="数字"
+          <n-input-number clearable :precision="1" class="input" round placeholder="数字"
                           v-model:value="morningLessCommonDrink">
             <template #suffix>
               清水
@@ -62,7 +62,7 @@
       <div class="inputDiv">
         <div class="inputContent">
           <a class="inputValue">备草</a>
-          <n-input-number clearable :precision="2" class="input" round placeholder="数字"
+          <n-input-number clearable :precision="1" class="input" round placeholder="数字"
                           v-model:value="yesterdayGiveGrass">
             <template #suffix>
               克
@@ -71,7 +71,7 @@
         </div>
         <div class="inputContent">
           <a class="inputValue">喂水</a>
-          <n-input-number clearable :precision="2" class="input" round placeholder="数字"
+          <n-input-number clearable :precision="1" class="input" round placeholder="数字"
                           v-model:value="yesterdayGiveSaltDrink">
             <template #suffix>
               盐水
@@ -80,7 +80,7 @@
         </div>
         <div class="inputContent">
           <a class="inputValue">喂水</a>
-          <n-input-number clearable :precision="2" class="input" round placeholder="数字"
+          <n-input-number clearable :precision="1" class="input" round placeholder="数字"
                           v-model:value="yesterdayGiveCommonDrink">
             <template #suffix>
               清水
@@ -89,7 +89,7 @@
         </div>
         <div class="inputContent">
           <a class="inputValue">剩下</a>
-          <n-input-number clearable :precision="2" class="input" round placeholder="数字"
+          <n-input-number clearable :precision="1" class="input" round placeholder="数字"
                           v-model:value="yesterdayLessGrass">
             <template #suffix>
               克草
@@ -98,7 +98,7 @@
         </div>
         <div class="inputContent">
           <a class="inputValue">剩下</a>
-          <n-input-number clearable :precision="2" class="input" round placeholder="数字"
+          <n-input-number clearable :precision="1" class="input" round placeholder="数字"
                           v-model:value="yesterdayLessSaltDrink">
             <template #suffix>
               盐水
@@ -107,7 +107,7 @@
         </div>
         <div class="inputContent">
           <a class="inputValue">剩下</a>
-          <n-input-number clearable :precision="2" class="input" round placeholder="数字"
+          <n-input-number clearable :precision="1" class="input" round placeholder="数字"
                           v-model:value="yesterdayLessCommonDrink">
             <template #suffix>
               清水
@@ -137,7 +137,7 @@
           </div>
           <div class="inputContent">
             <a class="inputValue">饲料</a>
-            <n-input-number class="input" round placeholder="数字"  :precision="2" v-model:value="feedEaten">
+            <n-input-number class="input" round placeholder="数字" :precision="1" v-model:value="feedEaten">
               <template #suffix>
                 克
               </template>
@@ -148,23 +148,34 @@
     </div>
 
     <div class="output">
-      <div class="outputDiv">
+      <div class="outputButtons">
         <n-button type="primary" class="outputButton" @click="clickOutput">
           输出
         </n-button>
+        <n-button type="primary" class="outputButton" @click="cleanAll">
+          清空
+        </n-button>
       </div>
-      <n-input
-          type="textarea"
-          class="outputInput"
-          placeholder="输出"
-          @focus="clipboardUse"
-          v-model:value="output">
-      </n-input>
-      <a>{{clipboardInfo}}</a>
+      <div class="outputWindow">
+        <n-alert type="info" v-if="clipboardStatus===false" class="tips">
+          可以单机输出框复制文本哦
+        </n-alert>
+        <n-alert type="info" v-if="errorStatus" class="tips">
+          {{ dataError }}
+        </n-alert>
+        <n-alert type="info" v-if="clipboardStatus===true" class="tips">
+          {{ clipboardInfo }}
+        </n-alert>
+        <n-input
+            type="textarea"
+            class="outputInput"
+            placeholder="输出"
+            @focus="clipboardUse"
+            v-model:value="output">
+        </n-input>
+        <a class="copyright">嘤嘤怪制作</a>
+      </div>
     </div>
-    <n-alert type="info">
-      可以单机输出框复制文本哦
-    </n-alert>
   </div>
 </template>
 <script setup lang="ts">
@@ -191,7 +202,7 @@ import 'moment/dist/locale/zh-cn.js';
 moment.locale("zh")
 
 
-const clipboardInfo =ref()
+const clipboardInfo = ref()
 const time = ref<string>()
 const output = ref<string>("")
 const morningEatCount = ref<number>()
@@ -201,26 +212,47 @@ const yesterdayDrinkCount = ref<number>()
 const allEatCount = ref<number>()
 const feedEaten = ref<number>(0)
 const allDrinkCount = ref<number>()
-const morningGiveWater=ref<number>()
-const morningLessDrink=ref<number>()
-const yesterdayGiveWater=ref<number>()
-const yesterdayLessWater =ref<number>()
+const morningGiveWater = ref<number>()
+const morningLessDrink = ref<number>()
+const yesterdayGiveWater = ref<number>()
+const yesterdayLessWater = ref<number>()
+const clipboardStatus = ref<boolean>(false)
+const dataError = ref<string>("")
+const errorStatus = ref<boolean>(false)
 
 function clipboardUse() {
   navigator.clipboard.writeText(output.value)
       .then(() => {
-        clipboardInfo.value="复制成功"
+        clipboardStatus.value = true
+        clipboardInfo.value = "复制成功"
       })
       .catch((error) => {
-        clipboardInfo.value="复制到剪贴板时出错"+error
+        clipboardStatus.value = true
+        clipboardInfo.value = "复制到剪贴板时出错" + error
       });
 }
 
+function cleanAll() {
+  ruminationCount.value = 0,
+      yesterdayGiveGrass.value = 0,
+      morningLessGrass.value = 0,
+      morningGiveGrass.value = 0,
+      yesterdayGiveSaltDrink.value = 0,
+      yesterdayLessGrass.value = 0,
+      morningLessSaltDrink.value = 0,
+      morningLessCommonDrink.value = 0,
+      morningGiveCommonWater.value = 0,
+      morningGiveSaltWater.value = 0,
+      yesterdayLessSaltDrink.value = 0,
+      yesterdayLessCommonDrink.value = 0,
+      yesterdayGiveCommonDrink.value = 0
+}
+
 function clickOutput() {
-  morningGiveWater.value=morningGiveSaltWater.value+morningGiveCommonWater.value
-  morningLessDrink.value=morningLessCommonDrink.value+morningLessSaltDrink.value
-  yesterdayLessWater.value=yesterdayLessSaltDrink.value+yesterdayLessCommonDrink.value
-  yesterdayGiveWater.value=yesterdayGiveCommonDrink.value+yesterdayGiveSaltDrink.value
+  morningGiveWater.value = morningGiveSaltWater.value + morningGiveCommonWater.value
+  morningLessDrink.value = morningLessCommonDrink.value + morningLessSaltDrink.value
+  yesterdayLessWater.value = yesterdayLessSaltDrink.value + yesterdayLessCommonDrink.value
+  yesterdayGiveWater.value = yesterdayGiveCommonDrink.value + yesterdayGiveSaltDrink.value
   //上面计算的总水量
   morningEatCount.value = morningGiveGrass.value - morningLessGrass.value
   morningDrinkCount.value = morningGiveWater.value - morningLessDrink.value
@@ -228,6 +260,38 @@ function clickOutput() {
   yesterdayDrinkCount.value = yesterdayGiveWater.value - yesterdayLessWater.value
   allEatCount.value = morningEatCount.value + yesterdayEatCount.value
   allDrinkCount.value = morningDrinkCount.value + yesterdayDrinkCount.value
+  if (feedEaten.value <= 0) {
+    dataError.value = "为什么没喂饲料"
+  }
+  if (morningEatCount.value < 0) {
+    dataError.value = "数据错误，请检查后填写"
+    errorStatus.value = true
+  }
+  if (morningDrinkCount.value < 0) {
+    dataError.value = "数据错误，请检查后填写"
+    errorStatus.value = true
+
+  }
+  if (yesterdayDrinkCount.value < 0) {
+    dataError.value = "数据错误，请检查后填写"
+    errorStatus.value = true
+
+  }
+  if (allEatCount.value < 0) {
+    dataError.value = "数据错误，请检查后填写"
+    errorStatus.value = true
+
+  }
+  if (allDrinkCount.value < 0) {
+    dataError.value = "数据错误，请检查后填写"
+    errorStatus.value = true
+  }
+  if (yesterdayEatCount.value < 0) {
+    dataError.value = "数据错误，请检查后填写"
+    errorStatus.value = true
+  }
+
+
   output.value = "🌟羊驼" + time.value + "结汇报" + "\n" + "1.白天备草" + morningGiveGrass.value + "克，剩余" + morningLessGrass.value + "克，吃了" +
       morningEatCount.value + "克\n2.昨晚备草" + yesterdayGiveGrass.value + "克，剩余" + yesterdayLessGrass.value + "克，吃了" + yesterdayEatCount.value +
       "克\n3.白天喂水" + morningGiveWater.value + "克，剩余" + morningLessDrink.value + "克\n" +
@@ -245,16 +309,40 @@ console.log(time)
 </script>
 
 <style lang="scss">
-.outputDiv {
+.outputButtons {
   padding: 1em;
   justify-content: center;
   display: flex;
+
+  .outputButton {
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+  }
 }
 
 .title {
   display: flex;
   justify-content: center;
   font-size: 1.2em;
+}
+
+.outputWindow {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+
+  .outputInput {
+    height: 19em;
+    margin-bottom: 1em;
+  }
+
+  .tips {
+    margin-bottom: 0.5em;
+  }
+
 }
 
 .inputDiv {
@@ -279,4 +367,10 @@ console.log(time)
   }
 
 }
+
+.copyright {
+  margin-bottom: 0.5em;
+}
+
+
 </style>
