@@ -6,14 +6,23 @@ import passwordSecure from "@/info/common.json"
 
 const passwordSecureNum: number = 1138198238 * 3 - 40 + 29131831 * 0.5 - passwordSecure.passwordSecureKey
 const passwordSecureString: string = passwordSecureNum.toString()
-const defaultPassword: string = passwordSecureNum.toString() + passwordSecure.password +passwordSecureString+passwordSecure.password
+const defaultPassword: string = passwordSecureNum.toString() + passwordSecure.password + passwordSecureString + passwordSecure.password
 export const testPassword = (inputPassword: string) => {
     const userInput: string = passwordSecureNum.toString() + inputPassword + passwordSecureString + inputPassword
     if (userInput === defaultPassword) {
         passwordIsTrue.value = true
     }
+    if (userInput !== defaultPassword) {
+        loginFailedStatus.value = true
+        setTimeout(function () {
+            loginFailedStatus.value = false
+        }, 2000)
+    }
 
 }
+
+
+export const loginFailedStatus: Ref<boolean> = useStorage("isLoginFailed", false)
 
 export const passwordIsTrue: Ref<boolean> = useStorage("isPasswordIsTrue", false)
 export const password: Ref<string> = useStorage("inputPassWord", "")

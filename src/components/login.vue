@@ -12,6 +12,11 @@
         />
       </div>
       <div>
+      <n-alert type="info" v-if="loginFailedStatus" class="tips">
+        登录失败请重试
+      </n-alert>
+      </div>
+      <div>
         <n-button type="primary" class="loginButton" @click="testPassword(password)">
           登录
         </n-button>
@@ -21,9 +26,8 @@
 </template>
 
 <script setup lang="ts">
-import {password, passwordIsTrue, testPassword} from "@/components/ts/useStorage";
-import {NInput, NButton} from 'naive-ui'
-
+import {password, passwordIsTrue, testPassword,loginFailedStatus} from "@/components/ts/useStorage";
+import {NInput, NButton, NAlert} from 'naive-ui'
 </script>
 
 
@@ -38,6 +42,11 @@ import {NInput, NButton} from 'naive-ui'
   .loginButton {
     width: 5em;
     margin-top: 1em;
+  }
+  .tips{
+    margin-top: 1em;
+    margin-left: 1em;
+    margin-right: 1em;
   }
 
   .loginWindow {
