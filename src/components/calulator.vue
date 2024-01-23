@@ -195,7 +195,6 @@ import {
 } from "@/components/ts/useStorage"
 import 'moment/dist/locale/en-au.js';
 import 'moment/dist/locale/zh-cn.js';
-import {set} from "@vueuse/core";
 
 moment.locale("zh")
 
@@ -364,8 +363,7 @@ time.value = moment().format("MM月DD日");
     padding-right: 0.5em;
 
     .inputValue {
-      padding-left: 1em;
-      padding-right: 1em;
+      padding-left: 0.75em;
     }
 
     .input {

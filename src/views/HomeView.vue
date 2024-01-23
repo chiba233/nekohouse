@@ -12,7 +12,7 @@
     </n-tab-pane>
   </n-tabs>
   </div>
-  <div class="copyrightDiv">
+  <div class="copyrightDiv" v-if="passwordIsTrue">
   <a>嘤嘤怪制作 仅授权:喵庄园及它它派对使用</a>
   </div>
 
@@ -31,7 +31,6 @@ import {NTabs,NTabPane} from "naive-ui";
 <style>
 .tab{
   display: flex;
-  text-align: center;
   align-items: center;
 }
 .copyrightDiv{
