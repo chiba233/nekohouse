@@ -34,6 +34,14 @@
 <script setup lang="ts">
 import {password, passwordIsTrue, testPassword, loginFailedStatus} from "@/components/ts/useStorage";
 import {NInput, NButton, NAlert} from 'naive-ui'
+if (!passwordIsTrue.value){
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter' && event.target === document.body) {
+      testPassword(password.value);
+    }
+  });
+}
+
 </script>
 
 

@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import {passwordIsTrue} from "@/components/ts/useStorage"
 import Login from "@/components/login.vue";
-import Calculator from "@/components/calulator.vue";
+import Calculator from "@/components/calculator.vue";
 import {NTabs,NTabPane} from "naive-ui";
 
 </script>

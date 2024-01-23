@@ -156,8 +156,8 @@
       </n-button>
     </div>
     <div class="outputWindow">
-      <n-alert type="info" v-if="clipboardStatus===false" class="tips">
-        可以单机输出框复制文本哦
+      <n-alert type="info"  class="tips">
+        {{ tipsData }}
       </n-alert>
       <n-alert type="info" v-if="errorStatus" class="tips">
         {{ dataError }}
@@ -191,7 +191,7 @@ import {
   morningLessCommonDrink,
   morningGiveCommonWater,
   morningGiveSaltWater,
-  yesterdayLessSaltDrink, yesterdayLessCommonDrink, yesterdayGiveCommonDrink,
+  yesterdayLessSaltDrink, yesterdayLessCommonDrink, yesterdayGiveCommonDrink, passwordIsTrue
 } from "@/components/ts/useStorage"
 import 'moment/dist/locale/en-au.js';
 import 'moment/dist/locale/zh-cn.js';
@@ -216,6 +216,14 @@ const yesterdayLessWater = ref<number>()
 const clipboardStatus = ref<boolean>(false)
 const dataError = ref<string>("")
 const errorStatus = ref<boolean>(false)
+const tipsData =ref<string>("可以单机输出框复制文本哦")
+if (passwordIsTrue.value){
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter' && event.target === document.body) {
+      clickOutput();
+    }
+  });
+}
 
 function clipboardUse() {
   navigator.clipboard.writeText(output.value)
