@@ -2,7 +2,7 @@
   <div>
 <Login></Login>
   </div>
-<div v-if="password===commonSettings.password">
+<div v-if="passwordIsTrue">
   <caculator></caculator>
 </div>
 </template>
@@ -10,8 +10,7 @@
 
 
 <script setup lang="ts">
-import {password} from "@/components/ts/useStorage";
-import commonSettings from "@/info/common.json"
+import {passwordIsTrue} from "@/components/ts/useStorage"
 import Login from "@/components/login.vue";
 import Caculator from "@/components/caculator.vue";
 

@@ -231,18 +231,18 @@ function clipboardUse() {
 }
 
 function cleanAll() {
-  ruminationCount.value = 0,
-      yesterdayGiveGrass.value = 0,
-      morningLessGrass.value = 0,
-      morningGiveGrass.value = 0,
-      yesterdayGiveSaltDrink.value = 0,
-      yesterdayLessGrass.value = 0,
-      morningLessSaltDrink.value = 0,
-      morningLessCommonDrink.value = 0,
-      morningGiveCommonWater.value = 0,
-      morningGiveSaltWater.value = 0,
-      yesterdayLessSaltDrink.value = 0,
-      yesterdayLessCommonDrink.value = 0,
+  ruminationCount.value = 0
+      yesterdayGiveGrass.value = 0
+      morningLessGrass.value = 0
+      morningGiveGrass.value = 0
+      yesterdayGiveSaltDrink.value = 0
+      yesterdayLessGrass.value = 0
+      morningLessSaltDrink.value = 0
+      morningLessCommonDrink.value = 0
+      morningGiveCommonWater.value = 0
+      morningGiveSaltWater.value = 0
+      yesterdayLessSaltDrink.value = 0
+      yesterdayLessCommonDrink.value = 0
       yesterdayGiveCommonDrink.value = 0
 }
 
@@ -304,7 +304,6 @@ function clickOutput() {
 }
 
 time.value = moment().format("MM月DD日");
-console.log(time)
 </script>
 
 <style lang="scss">
