@@ -21,7 +21,6 @@
 </template>
 
 <script setup lang="ts">
-
 import {password, passwordIsTrue, testPassword} from "@/components/ts/useStorage";
 import {NInput, NButton} from 'naive-ui'
 
