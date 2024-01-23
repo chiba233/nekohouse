@@ -12,21 +12,27 @@
         />
       </div>
       <div>
-      <n-alert type="info" v-if="loginFailedStatus" class="tips">
-        登录失败请重试
-      </n-alert>
+        <n-alert type="info" v-if="loginFailedStatus" class="tips">
+          登录失败请重试
+        </n-alert>
       </div>
       <div>
         <n-button type="primary" class="loginButton" @click="testPassword(password)">
           登录
         </n-button>
       </div>
+      <div class="copyrightLoginDiv">
+        <a>嘤嘤怪制作</a>
+      </div>
+      <div class="copyrightLoginDiv">
+        <a> 仅授权:喵庄园及它它派对使用</a>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import {password, passwordIsTrue, testPassword,loginFailedStatus} from "@/components/ts/useStorage";
+import {password, passwordIsTrue, testPassword, loginFailedStatus} from "@/components/ts/useStorage";
 import {NInput, NButton, NAlert} from 'naive-ui'
 </script>
 
@@ -39,11 +45,18 @@ import {NInput, NButton, NAlert} from 'naive-ui'
   height: 100vh;
   width: 100%;
 
+  .copyrightLoginDiv {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5em;
+  }
+
   .loginButton {
     width: 5em;
     margin-top: 1em;
   }
-  .tips{
+
+  .tips {
     margin-top: 1em;
     margin-left: 1em;
     margin-right: 1em;

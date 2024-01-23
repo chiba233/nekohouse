@@ -172,7 +172,6 @@
           @focus="clipboardUse"
           v-model:value="output">
       </n-input>
-      <a class="copyright">嘤嘤怪制作 仅授权:喵庄园及它它派对使用</a>
     </div>
   </div>
 </template>
@@ -196,6 +195,7 @@ import {
 } from "@/components/ts/useStorage"
 import 'moment/dist/locale/en-au.js';
 import 'moment/dist/locale/zh-cn.js';
+import {set} from "@vueuse/core";
 
 moment.locale("zh")
 
@@ -223,10 +223,12 @@ function clipboardUse() {
       .then(() => {
         clipboardStatus.value = true
         clipboardInfo.value = "复制成功"
+        setTimeout(function (){clipboardStatus.value = false},4000)
       })
       .catch((error) => {
         clipboardStatus.value = true
         clipboardInfo.value = "复制到剪贴板时出错" + error
+        setTimeout(function (){clipboardStatus.value = false},4000)
       });
 }
 
@@ -262,30 +264,37 @@ function clickOutput() {
   if (feedEaten.value <= 0) {
     dataError.value = "为什么没喂饲料"
     errorStatus.value = true
+    setTimeout(function (){errorStatus.value = false},4000)
   }
   if (yesterdayLessSaltDrink.value >= yesterdayGiveSaltDrink.value) {
     dataError.value = "昨天盐水数据错误，请检查后填写"
     errorStatus.value = true
+    setTimeout(function (){errorStatus.value = false},4000)
   }
   if (yesterdayLessCommonDrink.value >= yesterdayGiveCommonDrink.value) {
     dataError.value = "昨天清水数据错误，请检查后填写"
     errorStatus.value = true
+    setTimeout(function (){errorStatus.value = false},4000)
   }
   if(yesterdayLessGrass.value>=yesterdayGiveGrass.value){
     dataError.value = "昨天吃草数据错误，请检查后填写"
     errorStatus.value = true
+    setTimeout(function (){errorStatus.value = false},4000)
   }
   if (morningLessSaltDrink.value >= morningGiveSaltWater.value) {
     dataError.value = "早上盐水数据错误，请检查后填写"
     errorStatus.value = true
+    setTimeout(function (){errorStatus.value = false},4000)
   }
   if (morningLessCommonDrink.value >= morningGiveCommonWater.value) {
     dataError.value = "早上清水数据错误，请检查后填写"
     errorStatus.value = true
+    setTimeout(function (){errorStatus.value = false},4000)
   }
   if (morningLessGrass.value >= morningGiveGrass.value) {
     dataError.value = "早上吃草数据错误，请检查后填写"
     errorStatus.value = true
+    setTimeout(function (){errorStatus.value = false},4000)
   }
 
 
@@ -363,12 +372,5 @@ time.value = moment().format("MM月DD日");
       width: 13em;
     }
   }
-
 }
-
-.copyright {
-  margin-bottom: 1em;
-}
-
-
 </style>

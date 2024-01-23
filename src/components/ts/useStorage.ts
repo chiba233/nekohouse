@@ -20,8 +20,12 @@ export const testPassword = (inputPassword: string) => {
     }
 
 }
+//export const setPage = (selectPageNum: number) => {
+//    pageSelect.value = selectPageNum
+ //   console.log(pageSelect.value)
+//}
 
-
+//export const pageSelect: Ref<number> = useStorage("setPageSelect", 0)
 export const loginFailedStatus: Ref<boolean> = useStorage("isLoginFailed", false)
 
 export const passwordIsTrue: Ref<boolean> = useStorage("isPasswordIsTrue", false)
