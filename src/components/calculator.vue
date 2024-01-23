@@ -217,6 +217,7 @@ const clipboardStatus = ref<boolean>(false)
 const dataError = ref<string>("")
 const errorStatus = ref<boolean>(false)
 const tipsData =ref<string>("可以单机输出框复制文本哦")
+
 if (passwordIsTrue.value){
   document.addEventListener('keydown', function(event) {
     if (event.key === 'Enter' && event.target === document.body) {
