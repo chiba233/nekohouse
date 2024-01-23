@@ -172,7 +172,7 @@
           @focus="clipboardUse"
           v-model:value="output">
       </n-input>
-      <a class="copyright">嘤嘤怪制作</a>
+      <a class="copyright">嘤嘤怪制作 仅授权:喵庄园及它它派对使用</a>
     </div>
   </div>
 </template>
